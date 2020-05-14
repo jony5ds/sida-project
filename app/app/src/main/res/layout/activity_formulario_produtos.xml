@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.FormularioProdutosActivity"
+    android:background="@color/background">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Novo Produto"
+        android:textSize="36sp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="26dp"
+        android:textColor="@android:color/black"
+        android:fontFamily="@font/shadowsintolight_regular"/>
+
+    <LinearLayout
+        android:layout_below="@id/title"
+        android:id="@+id/form_conteudo"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="36dp"
+        android:padding="8dp"
+        android:orientation="vertical"
+        android:background="@drawable/background_shape">
+
+        <EditText
+            android:id="@+id/form_nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:fontFamily="@font/dancingscript_regular"
+            android:textSize="24sp"
+            android:layout_marginTop="28dp"
+            android:hint="@string/nome_do_produto"
+            android:inputType="textCapWords"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/form_teledone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+
+            android:hint="@string/marca_do_produto"
+            android:fontFamily="@font/dancingscript_regular"
+            android:textSize="24sp"
+            android:inputType="number"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/form_teledone_celular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:fontFamily="@font/dancingscript_regular"
+            android:textSize="24sp"
+            android:hint="@string/preco"
+            android:inputType="number"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/form_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dancingscript_regular"
+            android:textSize="24sp"
+            android:layout_margin="16dp"
+            android:hint="@string/kg"
+            android:inputType="textEmailAddress"
+            android:autofillHints="" />
+
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Salvar"
+        android:textSize="22sp"
+        android:onClick="salvar"
+        android:fontFamily="@font/shadowsintolight_regular"
+        android:textColor="@color/cardview_light_background"
+        android:background="@drawable/button_shape"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="42dp"
+        android:layout_alignBottom="@id/form_conteudo"
+        android:gravity="center"/>
+
+</RelativeLayout>
+
+</layout>

@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sida"
-        android:textSize="28sp"
+        android:textSize="36sp"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="26dp"
         android:textColor="@android:color/black"
@@ -40,6 +40,7 @@
             android:layout_alignParentBottom="true"
             android:layout_margin="16dp"
             android:src="@drawable/ic_add_button"
+            android:onClick="irParaFormulario"
             android:clickable="true"
             android:focusable="true" />
 

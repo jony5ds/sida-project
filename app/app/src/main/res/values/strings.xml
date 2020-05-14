@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Sida</string>
     <string name="sida">SIDA</string>
+    <string name="nome_do_produto">Nome do produto</string>
+    <string name="marca_do_produto">Marca do produto</string>
+    <string name="preco">Preço</string>
+    <string name="kg">KG</string>
 </resources>
