@@ -44,19 +44,18 @@
             android:importantForAutofill="no" />
 
         <EditText
-            android:id="@+id/form_teledone"
+            android:id="@+id/form_marca"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-
             android:hint="@string/marca_do_produto"
             android:fontFamily="@font/dancingscript_regular"
             android:textSize="24sp"
-            android:inputType="number"
+            android:inputType="textCapWords"
             android:importantForAutofill="no" />
 
         <EditText
-            android:id="@+id/form_teledone_celular"
+            android:id="@+id/form_preco"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -67,15 +66,15 @@
             android:importantForAutofill="no" />
 
         <EditText
-            android:id="@+id/form_email"
+            android:id="@+id/form_peso"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/dancingscript_regular"
             android:textSize="24sp"
             android:layout_margin="16dp"
             android:hint="@string/kg"
-            android:inputType="textEmailAddress"
-            android:autofillHints="" />
+            android:inputType="numberDecimal"
+            android:autofillHints="no" />
 
 
     </LinearLayout>

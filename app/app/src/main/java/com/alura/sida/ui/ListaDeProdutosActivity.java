@@ -6,7 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import com.alura.sida.R;
+import com.alura.sida.dao.ProdutoDao;
 import com.alura.sida.databinding.ListaDeProdutosActivityBinding;
+import com.alura.sida.model.ProdutoObj;
+
+import java.util.List;
 
 import static com.alura.sida.ui.Const.REQUEST_CODE_INSERE_PRODUTO;
 
@@ -26,5 +30,11 @@ public class ListaDeProdutosActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, FormularioProdutosActivity.class);
         startActivityForResult(intent,REQUEST_CODE_INSERE_PRODUTO);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        List<ProdutoObj> produtoObjs = new ProdutoDao().todosProdutos();
     }
 }

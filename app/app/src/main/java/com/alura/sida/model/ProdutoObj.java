@@ -8,7 +8,7 @@ public class ProdutoObj implements Serializable {
     private String nome;
     private String marca;
     private float preco;
-    private float kg;
+    private String kg;
 
     public ProdutoObj(String nome, String marca, float preco) {
         this.nome   = nome;
@@ -16,7 +16,7 @@ public class ProdutoObj implements Serializable {
         this.preco  = preco;
     }
 
-    public ProdutoObj(String nome, String marca, float preco,float kg) {
+    public ProdutoObj(String nome, String marca, float preco,String kg) {
         this.nome   = nome;
         this.marca  = marca;
         this.preco  = preco;
@@ -55,11 +55,11 @@ public class ProdutoObj implements Serializable {
         this.preco = preco;
     }
 
-    public float getKg() {
+    public String getKg() {
         return kg;
     }
 
-    public void setKg(float kg) {
+    public void setKg(String kg) {
         this.kg = kg;
     }
 }
