@@ -10,6 +10,9 @@ import com.alura.sida.R;
 import com.alura.sida.dao.ProdutoDao;
 import com.alura.sida.databinding.ActivityFormularioProdutosBinding;
 import com.alura.sida.model.ProdutoObj;
+import com.alura.sida.widget.MoneyTextWatcher;
+
+import java.util.Locale;
 
 public class FormularioProdutosActivity extends AppCompatActivity {
 
@@ -23,6 +26,13 @@ public class FormularioProdutosActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         _dao = new ProdutoDao();
 
+        mascaraMonetaria();
+
+    }
+
+    private void mascaraMonetaria() {
+        Locale locale = new Locale("pt", "BR");
+        _binding.formPreco.addTextChangedListener(new MoneyTextWatcher(_binding.formPreco,locale));
     }
 
     public void salvar(View v)
