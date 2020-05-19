@@ -1,4 +1,4 @@
-package com.alura.sida.ui;
+package com.alura.sida.ui.formulario;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -44,9 +44,6 @@ public class FormularioProdutosActivity extends AppCompatActivity {
     }
 
     private ProdutoObj criaProduto() {
-        return new ProdutoObj(_binding.formNome.getText().toString(),
-                _binding.formMarca.getText().toString(),
-               Float.parseFloat(_binding.formPreco.getText().toString()) ,
-                _binding.formPeso.getText().toString());
+        return new ProdutoObj("Arroz", "Tio João",5f,"8");
     }
 }

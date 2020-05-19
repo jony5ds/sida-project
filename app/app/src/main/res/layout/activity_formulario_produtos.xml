@@ -5,7 +5,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.FormularioProdutosActivity"
+    tools:context=".ui.formulario.FormularioProdutosActivity"
     android:background="@color/background">
 
     <TextView

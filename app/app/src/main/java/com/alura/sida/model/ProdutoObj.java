@@ -10,10 +10,7 @@ public class ProdutoObj implements Serializable {
     private float preco;
     private String kg;
 
-    public ProdutoObj(String nome, String marca, float preco) {
-        this.nome   = nome;
-        this.marca  = marca;
-        this.preco  = preco;
+    public ProdutoObj() {
     }
 
     public ProdutoObj(String nome, String marca, float preco,String kg) {

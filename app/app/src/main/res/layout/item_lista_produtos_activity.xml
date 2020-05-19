@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="produto"
+            type="com.alura.sida.model.ProdutoObj" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/produto_titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dancingscript_bold"
+            android:text="Produto:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/produto_nome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/produto_titulo"
+            android:fontFamily="@font/dancingscript_bold"
+            android:textSize="18sp"
+            tools:text="Feijão" />
+
+        <TextView
+            android:id="@+id/marca_titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/produto_titulo"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/dancingscript_regular"
+            android:text="Marca:"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/marca_nome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/produto_titulo"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@id/marca_titulo"
+            android:fontFamily="@font/dancingscript_regular"
+            android:textSize="14sp"
+            tools:text="Caioca" />
+
+        <TextView
+            android:id="@+id/produto_preco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:fontFamily="@font/dancingscript_bold"
+            android:textSize="14sp"
+            tools:text="R$ 8,50" />
+
+        <TextView
+            android:id="@+id/produto_peso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/produto_preco"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/dancingscript_regular"
+            android:textSize="14sp"
+            tools:text="KG: 5.00" />
+
+    </RelativeLayout>
+</layout>
