@@ -1,13 +1,15 @@
 package com.alura.sida.model;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 public class ProdutoObj implements Serializable {
 
     private long produtoId;
     private String nome;
     private String marca;
-    private float preco;
+    private double preco;
     private String kg;
 
     public ProdutoObj() {
@@ -44,7 +46,7 @@ public class ProdutoObj implements Serializable {
         this.marca = marca;
     }
 
-    public float getPreco() {
+    public double getPreco() {
         return preco;
     }
 
@@ -59,4 +61,14 @@ public class ProdutoObj implements Serializable {
     public void setKg(String kg) {
         this.kg = kg;
     }
+
+    public String getPrecoString()
+    {
+        String valor;
+        DecimalFormat formato = new DecimalFormat("#.00");
+        valor = formato.format(preco);
+        return "R$ " + valor;
+    }
+
+
 }
