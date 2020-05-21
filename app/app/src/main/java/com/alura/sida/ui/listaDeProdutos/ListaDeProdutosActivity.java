@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
 import com.alura.sida.R;
 import com.alura.sida.dao.ProdutoDao;
 import com.alura.sida.databinding.ListaDeProdutosActivityBinding;
@@ -26,13 +27,13 @@ public class ListaDeProdutosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         _binding = DataBindingUtil.setContentView(this,
                 R.layout.lista_de_produtos_activity);
         getSupportActionBar().hide();
 
         List<ProdutoObj> todosProdutos = getProdutos();
         configuraRecyclerView(todosProdutos);
-
     }
 
     private List<ProdutoObj> getProdutos() {
@@ -50,14 +51,19 @@ public class ListaDeProdutosActivity extends AppCompatActivity {
 
 
     private void popularListaProdutos(List<ProdutoObj> todosProdutos) {
-        _adapter = new ProdutosAdapter(todosProdutos);
-        _binding.rvListaProduto.setAdapter(_adapter);
+        if (todosProdutos.size() != 0) {
+            _adapter = new ProdutosAdapter(todosProdutos);
+            _binding.rvListaProduto.setAdapter(_adapter);
+            _binding.mensagemListaVazia.setVisibility(View.GONE);
+        }else
+        {
+            _binding.mensagemListaVazia.setVisibility(View.VISIBLE);
+        }
     }
 
-    public void irParaFormulario(View v)
-    {
+    public void irParaFormulario(View v) {
         Intent intent = new Intent(this, FormularioProdutosActivity.class);
-        startActivityForResult(intent,REQUEST_CODE_INSERE_PRODUTO);
+        startActivityForResult(intent, REQUEST_CODE_INSERE_PRODUTO);
     }
 
     @Override
