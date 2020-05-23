@@ -55,9 +55,11 @@ public class ListaDeProdutosActivity extends AppCompatActivity {
             _adapter = new ProdutosAdapter(todosProdutos);
             _binding.rvListaProduto.setAdapter(_adapter);
             _binding.mensagemListaVazia.setVisibility(View.GONE);
+            _binding.imagemSeta.setVisibility(View.GONE);
         }else
         {
             _binding.mensagemListaVazia.setVisibility(View.VISIBLE);
+            _binding.imagemSeta.setVisibility(View.VISIBLE);
         }
     }
 

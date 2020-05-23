@@ -44,18 +44,18 @@
             android:text="@string/mensagem_lista_vazia"
             android:textSize="22sp"
             android:fontFamily="@font/shadowsintolight_regular"
-            />
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/imagem_seta"
-            android:layout_width="167dp"
-            android:layout_height="195dp"
+            android:layout_width="185dp"
+            android:layout_height="217dp"
             android:layout_below="@id/mensagem_lista_vazia"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="115dp"
-            android:layout_marginEnd="100dp"
-            android:layout_marginRight="40dp"
-            android:src="@drawable/seta_azul" />
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="80dp"
+            android:src="@drawable/seta_azul"
+            android:visibility="gone"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_aluno"
@@ -74,8 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:listitem="@layout/item_lista_produtos_activity"
-            android:layout_marginTop="24dp"
-            android:visibility="gone"/>
+            android:layout_marginTop="24dp" />
 
     </RelativeLayout>
 </LinearLayout>
