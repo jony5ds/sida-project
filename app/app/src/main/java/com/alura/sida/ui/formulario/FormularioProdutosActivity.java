@@ -5,11 +5,13 @@ import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.alura.sida.R;
 import com.alura.sida.dao.ProdutoDao;
 import com.alura.sida.databinding.ActivityFormularioProdutosBinding;
 import com.alura.sida.model.ProdutoObj;
+import com.alura.sida.utils.NumberUtils;
 import com.alura.sida.widget.MoneyTextWatcher;
 
 import java.util.Locale;
@@ -18,6 +20,7 @@ public class FormularioProdutosActivity extends AppCompatActivity {
 
     ActivityFormularioProdutosBinding _binding;
     ProdutoDao _dao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,25 +28,44 @@ public class FormularioProdutosActivity extends AppCompatActivity {
                 R.layout.activity_formulario_produtos);
         getSupportActionBar().hide();
         _dao = new ProdutoDao();
-
         mascaraMonetaria();
 
     }
 
     private void mascaraMonetaria() {
         Locale locale = new Locale("pt", "BR");
-        _binding.formPreco.addTextChangedListener(new MoneyTextWatcher(_binding.formPreco,locale));
+        _binding.formPreco.addTextChangedListener(new MoneyTextWatcher(_binding.formPreco, locale));
     }
 
-    public void salvar(View v)
-    {
-        ProdutoObj novo_produto = criaProduto();
-        _dao.insere(novo_produto);
-        finish();
+    public void salvar(View v) {
+        if (!temCampoInvalido()) {
+            ProdutoObj novo_produto = criaProduto();
+            _dao.insere(novo_produto);
+            finish();
+        }
 
     }
 
     private ProdutoObj criaProduto() {
-        return new ProdutoObj("Arroz", "Tio João",5f,"8");
+        return new ProdutoObj(_binding.formNome.getText().toString(),
+                _binding.formMarca.getText().toString(),
+                NumberUtils.dinheiroParaFloat(_binding.formPreco.getText().toString()),
+                _binding.formPeso.getText().toString());
+    }
+
+    public boolean temCampoInvalido() {
+        ValidadorFormulário validarFormulario =
+                new ValidadorFormulário(_binding.formNome.getText().toString(),
+                        _binding.formPreco.getText().toString(),
+                        _binding.formMarca.getText().toString(),
+                        _binding.formPeso.getText().toString());
+
+        String mensagem = validarFormulario.validar();
+
+        if (!mensagem.isEmpty()) {
+            Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return false;
     }
 }

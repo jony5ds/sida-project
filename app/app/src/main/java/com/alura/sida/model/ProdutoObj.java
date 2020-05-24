@@ -1,5 +1,7 @@
 package com.alura.sida.model;
 
+import com.alura.sida.utils.NumberUtils;
+
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -62,11 +64,18 @@ public class ProdutoObj implements Serializable {
         this.kg = kg;
     }
 
+    public String getPesoFormatado()
+    {
+        if (getKg().isEmpty())
+        {
+            return "";
+        }
+        return "KG " + getKg();
+    }
+
     public String getPrecoString()
     {
-        String valor;
-        DecimalFormat formato = new DecimalFormat("#.00");
-        valor = formato.format(preco);
+        String valor = NumberUtils.formatarDecimal(preco);
         return "R$ " + valor;
     }
 

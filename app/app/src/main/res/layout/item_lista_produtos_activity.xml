@@ -71,7 +71,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/dancingscript_regular"
-            android:text="@{produto.kg}"
+            android:text="@{produto.pesoFormatado}"
             android:textSize="14sp"
             tools:text="KG: 5.00" />
 
