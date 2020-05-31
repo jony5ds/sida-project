@@ -1,6 +1,8 @@
 package com.alura.sida.ui.listaDeProdutos;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -10,16 +12,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alura.sida.R;
 import com.alura.sida.databinding.ItemListaProdutosActivityBinding;
 import com.alura.sida.model.ProdutoObj;
+import com.alura.sida.ui.formulario.FormularioProdutosActivity;
 
 import java.util.List;
 
+import static com.alura.sida.ui.Const.CHAVE_POSICAO;
+import static com.alura.sida.ui.Const.EDITAR_PRODUTO;
+
 public class ProdutosAdapter extends  RecyclerView.Adapter<ProdutosViewHolder> {
 
-
     private List<ProdutoObj> _listaDeProdutos;
+    private  ListaDeProdutosActivity _context;
 
     public ProdutosAdapter(List<ProdutoObj> _listaDeProdutos) {
         this._listaDeProdutos = _listaDeProdutos;
+    }
+
+    public ProdutosAdapter(List<ProdutoObj> todosProdutos, ListaDeProdutosActivity context) {
+        this._listaDeProdutos = todosProdutos;
+        this._context = context;
     }
 
     @NonNull
@@ -31,16 +42,27 @@ public class ProdutosAdapter extends  RecyclerView.Adapter<ProdutosViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProdutosViewHolder holder, int position) {
-        ProdutoObj produtoObj = _listaDeProdutos.get(position);
+    public void onBindViewHolder(@NonNull final ProdutosViewHolder holder, final int position) {
+        final ProdutoObj produtoObj = _listaDeProdutos.get(position);
         holder.getViewDataBinding().setProduto(produtoObj);
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                encaminharParaFormulario(produtoObj, position);
+                return false;
+            }
+        });
+    }
 
+    private void encaminharParaFormulario(ProdutoObj produtoObj, int position) {
+        Intent iniciaFormulario = new Intent(_context, FormularioProdutosActivity.class);
+        iniciaFormulario.putExtra(EDITAR_PRODUTO,produtoObj);
+        iniciaFormulario.putExtra(CHAVE_POSICAO,position);
+        _context.startActivity(iniciaFormulario);
     }
 
     @Override
     public int getItemCount() {
         return _listaDeProdutos.size();
     }
-
-
 }

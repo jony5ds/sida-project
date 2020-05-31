@@ -43,16 +43,21 @@ public class ListaDeProdutosActivity extends AppCompatActivity {
 
     private void configuraRecyclerView(List<ProdutoObj> todosProdutos) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        configuracaoPadraoDaLista(linearLayoutManager);
+        popularListaProdutos(todosProdutos);
+
+    }
+
+    private void configuracaoPadraoDaLista(LinearLayoutManager linearLayoutManager) {
         _binding.rvListaProduto.setHasFixedSize(true);
         _binding.rvListaProduto.setNestedScrollingEnabled(false);
         _binding.rvListaProduto.setLayoutManager(linearLayoutManager);
-        popularListaProdutos(todosProdutos);
     }
 
 
     private void popularListaProdutos(List<ProdutoObj> todosProdutos) {
         if (todosProdutos.size() != 0) {
-            _adapter = new ProdutosAdapter(todosProdutos);
+            _adapter = new ProdutosAdapter(todosProdutos,this);
             _binding.rvListaProduto.setAdapter(_adapter);
             _binding.mensagemListaVazia.setVisibility(View.GONE);
             _binding.imagemSeta.setVisibility(View.GONE);

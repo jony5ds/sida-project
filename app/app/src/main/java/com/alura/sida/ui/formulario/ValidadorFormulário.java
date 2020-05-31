@@ -1,7 +1,5 @@
 package com.alura.sida.ui.formulario;
 
-import com.alura.sida.model.ProdutoObj;
-
 public class ValidadorFormulário {
 
     private final String produtoNome;
@@ -34,10 +32,6 @@ public class ValidadorFormulário {
         {
             mensagem = "Preencha o preço do produto";
         }
-
         return mensagem;
-
-
     }
-
 }
