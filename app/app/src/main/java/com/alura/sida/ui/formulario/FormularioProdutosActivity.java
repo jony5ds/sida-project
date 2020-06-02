@@ -3,6 +3,7 @@ package com.alura.sida.ui.formulario;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,7 +19,7 @@ import com.alura.sida.widget.MoneyTextWatcher;
 import java.util.Locale;
 
 import static com.alura.sida.ui.Const.CHAVE_POSICAO;
-import static com.alura.sida.ui.Const.EDITAR_PRODUTO;
+import static com.alura.sida.ui.Const.CHAVE_PRODUTO;
 import static com.alura.sida.ui.Const.POSICAO_INVALIDA;
 
 public class FormularioProdutosActivity extends AppCompatActivity {
@@ -26,7 +27,7 @@ public class FormularioProdutosActivity extends AppCompatActivity {
     ActivityFormularioProdutosBinding _binding;
     ProdutoDao _dao;
     private int _posicao = POSICAO_INVALIDA;
-    private boolean ehAcaoAlterar = false;
+
     private ProdutoObj _produto;
 
     @Override
@@ -45,15 +46,15 @@ public class FormularioProdutosActivity extends AppCompatActivity {
     }
 
     private void veficaEdicao(Intent dadosRecebidos) {
-        if(dadosRecebidos.hasExtra(EDITAR_PRODUTO))
+        if(dadosRecebidos.hasExtra(CHAVE_PRODUTO))
         {
             _produto = (ProdutoObj) dadosRecebidos
-                    .getSerializableExtra(EDITAR_PRODUTO);
+                    .getSerializableExtra(CHAVE_PRODUTO);
 
             _posicao = dadosRecebidos.getIntExtra(CHAVE_POSICAO,POSICAO_INVALIDA);
 
             preencheCampos(_produto);
-            ehAcaoAlterar = true;
+
         }
     }
 
@@ -70,18 +71,18 @@ public class FormularioProdutosActivity extends AppCompatActivity {
     }
 
     public void salvar(View v) {
-        if(!ehAcaoAlterar) {
             if (!temCampoInvalido()) {
                 ProdutoObj novo_produto = criaProduto();
-                _dao.insere(novo_produto);
+                retornaProduto(novo_produto);
                 finish();
             }
-        }else
-        {
-            _produto = criaProduto();
-            _dao.altera(_posicao,_produto);
-            finish();
-        }
+    }
+
+    private void retornaProduto(ProdutoObj novo_produto) {
+        Intent resultadoProduto = new Intent();
+        resultadoProduto.putExtra(CHAVE_PRODUTO,novo_produto);
+        resultadoProduto.putExtra(CHAVE_POSICAO,_posicao);
+        setResult(Activity.RESULT_OK,resultadoProduto);
 
     }
 

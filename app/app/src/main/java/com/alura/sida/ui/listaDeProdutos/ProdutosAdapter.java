@@ -17,7 +17,8 @@ import com.alura.sida.ui.formulario.FormularioProdutosActivity;
 import java.util.List;
 
 import static com.alura.sida.ui.Const.CHAVE_POSICAO;
-import static com.alura.sida.ui.Const.EDITAR_PRODUTO;
+import static com.alura.sida.ui.Const.CHAVE_PRODUTO;
+import static com.alura.sida.ui.Const.REQUEST_CODE_ALTERA_PRODUTO;
 
 public class ProdutosAdapter extends  RecyclerView.Adapter<ProdutosViewHolder> {
 
@@ -56,13 +57,29 @@ public class ProdutosAdapter extends  RecyclerView.Adapter<ProdutosViewHolder> {
 
     private void encaminharParaFormulario(ProdutoObj produtoObj, int position) {
         Intent iniciaFormulario = new Intent(_context, FormularioProdutosActivity.class);
-        iniciaFormulario.putExtra(EDITAR_PRODUTO,produtoObj);
+        iniciaFormulario.putExtra(CHAVE_PRODUTO,produtoObj);
         iniciaFormulario.putExtra(CHAVE_POSICAO,position);
-        _context.startActivity(iniciaFormulario);
+        _context.startActivityForResult(iniciaFormulario,REQUEST_CODE_ALTERA_PRODUTO);
     }
 
     @Override
     public int getItemCount() {
         return _listaDeProdutos.size();
+    }
+
+    public void remove(int produtoPosicao) {
+            _listaDeProdutos.remove(produtoPosicao);
+            notifyItemRemoved(produtoPosicao);
+    }
+
+    public void adicionaProduto(ProdutoObj produto) {
+        _listaDeProdutos.add(produto);
+        notifyDataSetChanged();
+
+    }
+
+    public void altera(int posicao, ProdutoObj produto) {
+        _listaDeProdutos.set(posicao,produto);
+        notifyDataSetChanged();
     }
 }
