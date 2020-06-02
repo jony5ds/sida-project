@@ -1,81 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/background">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sida"
-            android:textSize="36sp"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="26dp"
-            android:textColor="@android:color/black"
-            android:fontFamily="@font/dancingscript_bold"/>
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_marginTop="36dp"
-        android:padding="8dp"
-        android:orientation="vertical"
-        android:background="@drawable/background_shape">
+        android:background="@color/background"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/mensagem_lista_vazia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="48dp"
-            android:text="@string/mensagem_lista_vazia"
-            android:textSize="22sp"
-            android:fontFamily="@font/shadowsintolight_regular"
-            android:visibility="gone"/>
-
-        <ImageView
-            android:id="@+id/imagem_seta"
-            android:layout_width="185dp"
-            android:layout_height="217dp"
-            android:layout_below="@id/mensagem_lista_vazia"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="80dp"
-            android:src="@drawable/seta_azul"
-            android:visibility="gone"/>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/add_aluno"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="16dp"
-            android:src="@drawable/ic_add_button"
-            android:onClick="irParaFormulario"
-            android:clickable="true"
-            android:focusable="true" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_lista_produto"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/item_lista_produtos_activity"
-            android:layout_marginTop="24dp" />
+            android:orientation="horizontal">
 
-    </RelativeLayout>
-</LinearLayout>
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="26dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/dancingscript_bold"
+                android:text="@string/sida"
+                android:textColor="@android:color/black"
+                android:textSize="36sp" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="36dp"
+            android:background="@drawable/background_shape"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/mensagem_lista_vazia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginRight="8dp"
+                android:fontFamily="@font/shadowsintolight_regular"
+                android:text="@string/mensagem_lista_vazia"
+                android:textSize="22sp"
+                android:visibility="gone"/>
+
+
+            <ImageView
+                android:id="@+id/imagem_seta"
+                android:layout_width="150dp"
+                android:layout_height="160dp"
+                android:layout_below="@id/mensagem_lista_vazia"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="80dp"
+                android:src="@drawable/seta_azul"
+                android:visibility="gone"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_lista_produto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                tools:listitem="@layout/item_lista_produtos_activity" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/add_aluno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="irParaFormulario"
+                android:src="@drawable/ic_add_button" />
+
+        </RelativeLayout>
+    </LinearLayout>
 </layout>

@@ -46,11 +46,10 @@ public class ProdutosAdapter extends  RecyclerView.Adapter<ProdutosViewHolder> {
     public void onBindViewHolder(@NonNull final ProdutosViewHolder holder, final int position) {
         final ProdutoObj produtoObj = _listaDeProdutos.get(position);
         holder.getViewDataBinding().setProduto(produtoObj);
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
+            public void onClick(View v) {
                 encaminharParaFormulario(produtoObj, position);
-                return false;
             }
         });
     }

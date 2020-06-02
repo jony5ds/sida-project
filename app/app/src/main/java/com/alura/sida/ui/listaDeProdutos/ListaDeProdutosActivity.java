@@ -71,7 +71,7 @@ public class ListaDeProdutosActivity extends AppCompatActivity {
     }
 
 
-    private void popularListaProdutos(List<ProdutoObj> todosProdutos) {
+    public void popularListaProdutos(List<ProdutoObj> todosProdutos) {
         _adapter = new ProdutosAdapter(todosProdutos, this);
         _binding.rvListaProduto.setAdapter(_adapter);
 

@@ -1,5 +1,7 @@
 package com.alura.sida.ui.listaDeProdutos;
 
+import android.app.AlertDialog;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,9 +40,20 @@ public class NotasItemTouchHelper extends ItemTouchHelper.Callback {
     }
 
     private void removeProduto(int produtoPosicao) {
-        _produtoDao.remove(produtoPosicao);
-        _adapter.remove(produtoPosicao);
-        _activity.controleVisaoLista(_produtoDao.todosProdutos());
+        new AlertDialog.Builder(_activity)
+                .setTitle("Remover Produto")
+                .setMessage("Você está preste a remover um produto, deseja continaur ?")
+                .setPositiveButton("SIM",(dialogInterface,i)->{
+                    _produtoDao.remove(produtoPosicao);
+                    _adapter.remove(produtoPosicao);
+                    _activity.controleVisaoLista(_produtoDao.todosProdutos());
+
+                })
+                .setNegativeButton("NÃO",(dialog, which) -> {
+                    _activity.popularListaProdutos(_produtoDao.todosProdutos());
+                })
+                .show();
+
 
     }
 }
