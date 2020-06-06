@@ -17,7 +17,9 @@ import com.alura.sida.dao.ProdutoDao;
 import com.alura.sida.databinding.ListaDeProdutosActivityBinding;
 import com.alura.sida.model.ProdutoObj;
 import com.alura.sida.ui.formulario.FormularioProdutosActivity;
+import com.alura.sida.widget.SimpleDividerItemDecoration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.alura.sida.ui.Const.CHAVE_POSICAO;
@@ -43,6 +45,7 @@ public class ListaDeProdutosActivity extends AppCompatActivity {
         _produtoDao = new ProdutoDao();
 
         List<ProdutoObj> todosProdutos = getProdutos();
+
         configuraRecyclerView(todosProdutos);
     }
 
@@ -68,6 +71,7 @@ public class ListaDeProdutosActivity extends AppCompatActivity {
         _binding.rvListaProduto.setHasFixedSize(true);
         _binding.rvListaProduto.setNestedScrollingEnabled(false);
         _binding.rvListaProduto.setLayoutManager(linearLayoutManager);
+        _binding.rvListaProduto.addItemDecoration(new SimpleDividerItemDecoration(this));
     }
 
 
@@ -81,6 +85,7 @@ public class ListaDeProdutosActivity extends AppCompatActivity {
     }
 
     public void controleVisaoLista(List<ProdutoObj> todosProdutos) {
+
         if (todosProdutos.size() != 0) {
             _binding.mensagemListaVazia.setVisibility(View.GONE);
             _binding.imagemSeta.setVisibility(View.GONE);

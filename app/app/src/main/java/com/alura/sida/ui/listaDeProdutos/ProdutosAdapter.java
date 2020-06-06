@@ -37,7 +37,8 @@ public class ProdutosAdapter extends  RecyclerView.Adapter<ProdutosViewHolder> {
     @NonNull
     @Override
     public ProdutosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-         final ItemListaProdutosActivityBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
+         final ItemListaProdutosActivityBinding binding = DataBindingUtil
+                 .inflate(LayoutInflater.from(parent.getContext()),
                         R.layout.item_lista_produtos_activity,parent,false);
         return new ProdutosViewHolder(binding);
     }

@@ -71,6 +71,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/dancingscript_regular"
             android:textSize="24sp"
+            android:layout_marginBottom="24dp"
             android:layout_margin="16dp"
             android:hint="@string/kg"
             android:inputType="numberDecimal"
@@ -89,7 +90,7 @@
         android:textColor="@color/cardview_light_background"
         android:background="@drawable/button_shape"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="42dp"
+        android:layout_marginBottom="30dp"
         android:layout_alignBottom="@id/form_conteudo"
         android:gravity="center"/>
 

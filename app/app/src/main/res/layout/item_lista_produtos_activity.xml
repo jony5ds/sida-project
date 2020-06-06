@@ -5,6 +5,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:paddingLeft="16dp"
         android:paddingTop="8dp"
         android:paddingRight="16dp"
@@ -16,7 +17,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/dancingscript_bold"
             android:text="Produto:"
-            android:textSize="18sp" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/produto_nome"
@@ -27,7 +28,7 @@
             android:layout_toRightOf="@id/produto_titulo"
             android:fontFamily="@font/dancingscript_bold"
             android:text="@{produto.nome}"
-            android:textSize="18sp"
+            android:textSize="24sp"
             tools:text="Feijão" />
 
         <TextView
@@ -38,7 +39,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/dancingscript_regular"
             android:text="Marca:"
-            android:textSize="14sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/marca_nome"
@@ -50,7 +51,7 @@
             android:layout_toRightOf="@id/marca_titulo"
             android:fontFamily="@font/dancingscript_regular"
             android:text="@{produto.marca}"
-            android:textSize="14sp"
+            android:textSize="20sp"
             tools:text="Caioca" />
 
         <TextView
@@ -60,7 +61,7 @@
             android:layout_alignParentRight="true"
             android:fontFamily="@font/dancingscript_bold"
             android:text="@{produto.getPrecoString()}"
-            android:textSize="14sp"
+            android:textSize="20sp"
             tools:text="R$ 8,50" />
 
         <TextView
@@ -70,9 +71,10 @@
             android:layout_below="@id/produto_preco"
             android:layout_alignParentRight="true"
             android:layout_marginTop="8dp"
+
             android:fontFamily="@font/dancingscript_regular"
             android:text="@{produto.pesoFormatado}"
-            android:textSize="14sp"
+            android:textSize="20sp"
             tools:text="KG: 5.00" />
 
     </RelativeLayout>
@@ -83,4 +85,6 @@
             name="produto"
             type="com.alura.sida.model.ProdutoObj" />
     </data>
+
+
 </layout>
