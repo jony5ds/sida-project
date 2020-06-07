@@ -28,42 +28,34 @@ import static com.alura.sida.ui.Const.POSICAO_INVALIDA;
 import static com.alura.sida.ui.Const.REQUEST_CODE_ALTERA_PRODUTO;
 import static com.alura.sida.ui.Const.REQUEST_CODE_INSERE_PRODUTO;
 
-public class ListaDeProdutosActivity extends AppCompatActivity {
+public class ListaDeProdutosActivity extends AppCompatActivity implements IlistaDeProdutosView {
 
     ListaDeProdutosActivityBinding _binding;
+    ListaDeProdutosPresenter _presenter;
     ProdutosAdapter _adapter;
-    ProdutoDao _produtoDao;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         _binding = DataBindingUtil.setContentView(this,
                 R.layout.lista_de_produtos_activity);
+        _presenter = new ListaDeProdutosPresenter(this);
+        _presenter.onCreate();
         getSupportActionBar().hide();
-
-        _produtoDao = new ProdutoDao();
-
-        List<ProdutoObj> todosProdutos = getProdutos();
-
-        configuraRecyclerView(todosProdutos);
     }
 
-    private List<ProdutoObj> getProdutos() {
-        ProdutoDao produtoDao = new ProdutoDao();
-        return produtoDao.todosProdutos();
-    }
 
-    private void configuraRecyclerView(List<ProdutoObj> todosProdutos) {
+    public void configuraRecyclerView(List<ProdutoObj> todosProdutos) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         configuracaoPadraoDaLista(linearLayoutManager);
         popularListaProdutos(todosProdutos);
 
     }
 
-    private void configuraItemTouchHelper(RecyclerView listaProduto) {
+    public void configuraItemTouchHelper(RecyclerView listaProduto) {
         ItemTouchHelper touchHelper = new ItemTouchHelper
-                (new NotasItemTouchHelper(_adapter,this));
+                (new NotasItemTouchHelper(_adapter, this));
         touchHelper.attachToRecyclerView(listaProduto);
     }
 
@@ -78,14 +70,11 @@ public class ListaDeProdutosActivity extends AppCompatActivity {
     public void popularListaProdutos(List<ProdutoObj> todosProdutos) {
         _adapter = new ProdutosAdapter(todosProdutos, this);
         _binding.rvListaProduto.setAdapter(_adapter);
-
         configuraItemTouchHelper(_binding.rvListaProduto);
-
         controleVisaoLista(todosProdutos);
     }
 
     public void controleVisaoLista(List<ProdutoObj> todosProdutos) {
-
         if (todosProdutos.size() != 0) {
             _binding.mensagemListaVazia.setVisibility(View.GONE);
             _binding.imagemSeta.setVisibility(View.GONE);
@@ -106,8 +95,7 @@ public class ListaDeProdutosActivity extends AppCompatActivity {
         if (ehResultadoNovoProduto(requestCode, resultCode, data)) {
             ProdutoObj produtoRecebido = (ProdutoObj) data.getSerializableExtra(CHAVE_PRODUTO);
             adicionaProduto(produtoRecebido);
-        }
-        else if (ehResultadoDeAlteracao(requestCode, resultCode, data)) {
+        } else if (ehResultadoDeAlteracao(requestCode, resultCode, data)) {
             ProdutoObj produtoRecebido = (ProdutoObj) data.getSerializableExtra(CHAVE_PRODUTO);
             int posicaoRecebida = data.getIntExtra(CHAVE_POSICAO, POSICAO_INVALIDA);
             alteraProduto(produtoRecebido, posicaoRecebida);
@@ -115,7 +103,7 @@ public class ListaDeProdutosActivity extends AppCompatActivity {
     }
 
     private void alteraProduto(ProdutoObj produto, int posicao) {
-        _produtoDao.altera(posicao, produto);
+        _presenter.alteraProduto(posicao, produto);
         _adapter.altera(posicao, produto);
     }
 
@@ -128,7 +116,7 @@ public class ListaDeProdutosActivity extends AppCompatActivity {
     }
 
     private void adicionaProduto(ProdutoObj produtoRecebido) {
-        _produtoDao.insere(produtoRecebido);
+        _presenter.insereProduto(produtoRecebido);
         _adapter.adicionaProduto(produtoRecebido);
     }
 
@@ -142,6 +130,6 @@ public class ListaDeProdutosActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        controleVisaoLista(_produtoDao.todosProdutos());
+        controleVisaoLista(_presenter.getProdutos());
     }
 }
