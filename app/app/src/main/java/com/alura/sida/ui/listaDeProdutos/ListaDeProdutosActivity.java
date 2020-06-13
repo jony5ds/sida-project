@@ -14,6 +14,8 @@ import android.view.View;
 
 import com.alura.sida.R;
 import com.alura.sida.dao.ProdutoDao;
+import com.alura.sida.dao.ProdutoDataBase;
+import com.alura.sida.dao.ProdutoRoomDao;
 import com.alura.sida.databinding.ListaDeProdutosActivityBinding;
 import com.alura.sida.model.ProdutoObj;
 import com.alura.sida.ui.formulario.FormularioProdutosActivity;
@@ -41,7 +43,7 @@ public class ListaDeProdutosActivity extends AppCompatActivity implements Ilista
         _binding = DataBindingUtil.setContentView(this,
                 R.layout.lista_de_produtos_activity);
         _presenter = new ListaDeProdutosPresenter(this);
-        _presenter.onCreate();
+        _presenter.onCreate(this);
         getSupportActionBar().hide();
     }
 
@@ -75,7 +77,7 @@ public class ListaDeProdutosActivity extends AppCompatActivity implements Ilista
     }
 
     public void controleVisaoLista(List<ProdutoObj> todosProdutos) {
-        if (todosProdutos.size() != 0) {
+        if (todosProdutos != null) {
             _binding.mensagemListaVazia.setVisibility(View.GONE);
             _binding.imagemSeta.setVisibility(View.GONE);
         } else {
@@ -130,6 +132,6 @@ public class ListaDeProdutosActivity extends AppCompatActivity implements Ilista
     @Override
     protected void onResume() {
         super.onResume();
-        controleVisaoLista(_presenter.getProdutos());
+        //controleVisaoLista(_presenter.getProdutos());
     }
 }

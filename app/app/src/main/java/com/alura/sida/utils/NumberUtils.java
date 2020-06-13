@@ -3,7 +3,7 @@ package com.alura.sida.utils;
 import java.text.DecimalFormat;
 
 public class NumberUtils {
-    public static String  formatarDecimal(Double valor)
+    public static String  formatarDecimal(float valor)
     {
         String resultado;
         DecimalFormat formato = new DecimalFormat("#.00");

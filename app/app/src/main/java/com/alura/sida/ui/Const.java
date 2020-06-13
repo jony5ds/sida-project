@@ -6,4 +6,5 @@ public interface Const {
     int REQUEST_CODE_INSERE_PRODUTO = 1;
     int REQUEST_CODE_ALTERA_PRODUTO = 2;
     int POSICAO_INVALIDA = -1;
+    String NOME_BANCO_DE_DADOS = "produto.db";
 }

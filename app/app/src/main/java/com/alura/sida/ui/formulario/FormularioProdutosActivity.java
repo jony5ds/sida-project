@@ -25,9 +25,7 @@ import static com.alura.sida.ui.Const.POSICAO_INVALIDA;
 public class FormularioProdutosActivity extends AppCompatActivity {
 
     ActivityFormularioProdutosBinding _binding;
-    ProdutoDao _dao;
     private int _posicao = POSICAO_INVALIDA;
-
     private ProdutoObj _produto;
 
     @Override
@@ -36,7 +34,7 @@ public class FormularioProdutosActivity extends AppCompatActivity {
         _binding = DataBindingUtil.setContentView(this,
                 R.layout.activity_formulario_produtos);
         getSupportActionBar().hide();
-        _dao = new ProdutoDao();
+
         mascaraMonetaria();
 
         Intent dadosRecebidos = getIntent();
@@ -102,7 +100,6 @@ public class FormularioProdutosActivity extends AppCompatActivity {
                         _binding.formPeso.getText().toString());
 
         String mensagem = validarFormulario.validar();
-
         if (!mensagem.isEmpty()) {
             Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
             return true;

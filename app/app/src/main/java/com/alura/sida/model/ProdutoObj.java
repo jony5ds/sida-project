@@ -1,17 +1,18 @@
 package com.alura.sida.model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 import com.alura.sida.utils.NumberUtils;
-
 import java.io.Serializable;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
+@Entity
 public class ProdutoObj implements Serializable {
 
+    @PrimaryKey(autoGenerate = true)
     private long produtoId;
     private String nome;
     private String marca;
-    private double preco;
+    private float preco;
     private String kg;
 
     public ProdutoObj() {
@@ -48,7 +49,7 @@ public class ProdutoObj implements Serializable {
         this.marca = marca;
     }
 
-    public double getPreco() {
+    public float getPreco() {
         return preco;
     }
 

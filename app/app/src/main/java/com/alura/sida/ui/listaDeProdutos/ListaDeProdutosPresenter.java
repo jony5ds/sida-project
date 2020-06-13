@@ -1,6 +1,12 @@
 package com.alura.sida.ui.listaDeProdutos;
 
-import com.alura.sida.dao.ProdutoDao;
+import android.content.Context;
+
+import com.alura.sida.asyncTask.AlterarProdutoTask;
+import com.alura.sida.asyncTask.BuscarTodosProdutosTask;
+import com.alura.sida.asyncTask.InserirProdutoTask;
+import com.alura.sida.dao.ProdutoDataBase;
+import com.alura.sida.dao.ProdutoRoomDao;
 import com.alura.sida.model.ProdutoObj;
 
 import java.util.List;
@@ -11,24 +17,29 @@ public class ListaDeProdutosPresenter {
     }
 
     private IlistaDeProdutosView _view;
-   private ProdutoDao _produtoDao;
+    private ProdutoRoomDao _produtoDao;
+    private List<ProdutoObj> _todosProdutos;
 
-    public void onCreate()
+    public void onCreate(Context context)
     {
-        _produtoDao = new ProdutoDao();
-        List<ProdutoObj> todosProdutos = getProdutos();
-        _view.configuraRecyclerView(todosProdutos);
+        _produtoDao = ProdutoDataBase.getInstance(context).getProdutoDao();
+        carregarProdutos();
     }
 
-    public List<ProdutoObj> getProdutos() {
-        return  _produtoDao.todosProdutos();
+     void carregarProdutos() {
+        new BuscarTodosProdutosTask(_produtoDao,produtos ->{
+            _view.configuraRecyclerView(produtos);
+        } ).execute();
     }
 
     public void insereProduto(ProdutoObj produtoRecebido) {
-        _produtoDao.insere(produtoRecebido);
+        new InserirProdutoTask(_produtoDao,produtoRecebido).execute();
     }
 
     public void alteraProduto(int posicao, ProdutoObj produto) {
-        _produtoDao.altera(posicao, produto);
+
+        new AlterarProdutoTask(_produtoDao,produto).execute();
+
     }
+
 }
