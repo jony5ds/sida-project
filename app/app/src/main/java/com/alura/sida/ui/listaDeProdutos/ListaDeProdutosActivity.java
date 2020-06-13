@@ -77,7 +77,7 @@ public class ListaDeProdutosActivity extends AppCompatActivity implements Ilista
     }
 
     public void controleVisaoLista(List<ProdutoObj> todosProdutos) {
-        if (todosProdutos != null) {
+        if (todosProdutos.size() > 0) {
             _binding.mensagemListaVazia.setVisibility(View.GONE);
             _binding.imagemSeta.setVisibility(View.GONE);
         } else {
@@ -129,9 +129,4 @@ public class ListaDeProdutosActivity extends AppCompatActivity implements Ilista
                 && data.hasExtra(CHAVE_PRODUTO);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //controleVisaoLista(_presenter.getProdutos());
-    }
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import com.alura.sida.asyncTask.AlterarProdutoTask;
 import com.alura.sida.asyncTask.BuscarTodosProdutosTask;
 import com.alura.sida.asyncTask.InserirProdutoTask;
+import com.alura.sida.asyncTask.ObterListaDeProdutosTask;
 import com.alura.sida.dao.ProdutoDataBase;
 import com.alura.sida.dao.ProdutoRoomDao;
 import com.alura.sida.model.ProdutoObj;
@@ -37,9 +38,12 @@ public class ListaDeProdutosPresenter {
     }
 
     public void alteraProduto(int posicao, ProdutoObj produto) {
-
         new AlterarProdutoTask(_produtoDao,produto).execute();
-
     }
 
+    public List<ProdutoObj> getProdutos()
+    {
+        List<ProdutoObj> list = (List<ProdutoObj>) new ObterListaDeProdutosTask(_produtoDao).execute();
+       return list ;
+    }
 }

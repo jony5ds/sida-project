@@ -6,7 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alura.sida.dao.ProdutoDao;
+import com.alura.sida.asyncTask.BuscarTodosProdutosTask;
+import com.alura.sida.asyncTask.DeletarProdutoTask;
+import com.alura.sida.asyncTask.listeners.BuscarTodosProdutosListener;
+import com.alura.sida.asyncTask.listeners.FinalizadoListener;
 import com.alura.sida.dao.ProdutoDataBase;
 import com.alura.sida.dao.ProdutoRoomDao;
 import com.alura.sida.model.ProdutoObj;
@@ -46,7 +49,6 @@ public class NotasItemTouchHelper extends ItemTouchHelper.Callback {
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
         int produtoPosicao = viewHolder.getAdapterPosition();
-        long idProduto = viewHolder.getItemId();
         removeProduto(produtoPosicao);
     }
 
@@ -55,17 +57,25 @@ public class NotasItemTouchHelper extends ItemTouchHelper.Callback {
                 .setTitle("Remover Produto")
                 .setMessage("Você está preste a remover um produto, deseja continaur ?")
                 .setPositiveButton("SIM", (dialogInterface, i) -> {
-                    acaoDeletar();
+                    acaoDeletar(produtoPosicao);
                 })
                 .setNegativeButton("NÃO", (dialog, which) -> {
-                    _activity.popularListaProdutos(_produtoDao.obterTodosProdutos());
+                    new BuscarTodosProdutosTask(_produtoDao, new BuscarTodosProdutosListener() {
+                        @Override
+                        public void quandoEncontrado(List<ProdutoObj> produtos) {
+                            _activity.popularListaProdutos(produtos);
+                        }
+                    }).execute();
                 })
                 .show();
     }
 
-    private void acaoDeletar() {
-        _produtoDao.deletar(produtoPosicao);
-        _adapter.remove(produtoPosicao);
-        _activity.controleVisaoLista(_produtoDao.obterTodosProdutos());
+    private void acaoDeletar(int produtoPosicao) {
+        new DeletarProdutoTask(_produtoDao, produtoPosicao, () -> {
+            _adapter.remove(produtoPosicao);
+            new BuscarTodosProdutosTask(_produtoDao, produtos -> _activity.controleVisaoLista(produtos)).execute();
+        }).execute();
+
+
     }
 }
