@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.alura.sida.R;
+import com.alura.sida.asyncTask.BuscarTodosProdutosTask;
+import com.alura.sida.asyncTask.listeners.BuscarTodosProdutosListener;
 import com.alura.sida.dao.ProdutoDao;
 import com.alura.sida.dao.ProdutoDataBase;
 import com.alura.sida.dao.ProdutoRoomDao;
@@ -35,6 +37,7 @@ public class ListaDeProdutosActivity extends AppCompatActivity implements Ilista
     ListaDeProdutosActivityBinding _binding;
     ListaDeProdutosPresenter _presenter;
     ProdutosAdapter _adapter;
+    ProdutoRoomDao _produtoDao;
 
 
     @Override
@@ -44,6 +47,7 @@ public class ListaDeProdutosActivity extends AppCompatActivity implements Ilista
                 R.layout.lista_de_produtos_activity);
         _presenter = new ListaDeProdutosPresenter(this);
         _presenter.onCreate(this);
+         _produtoDao = ProdutoDataBase.getInstance(this).getProdutoDao();
         getSupportActionBar().hide();
     }
 
@@ -120,6 +124,7 @@ public class ListaDeProdutosActivity extends AppCompatActivity implements Ilista
     private void adicionaProduto(ProdutoObj produtoRecebido) {
         _presenter.insereProduto(produtoRecebido);
         _adapter.adicionaProduto(produtoRecebido);
+
     }
 
     private boolean ehResultadoNovoProduto(int requestCode, int resultCode, Intent data) {
@@ -129,4 +134,10 @@ public class ListaDeProdutosActivity extends AppCompatActivity implements Ilista
                 && data.hasExtra(CHAVE_PRODUTO);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new BuscarTodosProdutosTask(_produtoDao, produtos ->
+                controleVisaoLista(produtos)).execute();
+    }
 }

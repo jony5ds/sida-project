@@ -1,7 +1,6 @@
 package com.alura.sida.ui.listaDeProdutos;
 
 import android.content.Context;
-
 import com.alura.sida.asyncTask.AlterarProdutoTask;
 import com.alura.sida.asyncTask.BuscarTodosProdutosTask;
 import com.alura.sida.asyncTask.InserirProdutoTask;
@@ -41,9 +40,8 @@ public class ListaDeProdutosPresenter {
         new AlterarProdutoTask(_produtoDao,produto).execute();
     }
 
-    public List<ProdutoObj> getProdutos()
-    {
-        List<ProdutoObj> list = (List<ProdutoObj>) new ObterListaDeProdutosTask(_produtoDao).execute();
-       return list ;
-    }
+
+
+
+
 }

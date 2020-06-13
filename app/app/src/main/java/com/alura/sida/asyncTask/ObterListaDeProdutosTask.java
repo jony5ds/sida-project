@@ -2,6 +2,7 @@ package com.alura.sida.asyncTask;
 
 import android.os.AsyncTask;
 
+import com.alura.sida.asyncTask.listeners.FinalizadoListener;
 import com.alura.sida.dao.ProdutoRoomDao;
 import com.alura.sida.model.ProdutoObj;
 
@@ -20,4 +21,5 @@ public class ObterListaDeProdutosTask extends AsyncTask<Void, Void, List<Produto
     protected List<ProdutoObj> doInBackground(Void... voids) {
         return _produtoDao.obterTodosProdutos();
     }
+
 }
