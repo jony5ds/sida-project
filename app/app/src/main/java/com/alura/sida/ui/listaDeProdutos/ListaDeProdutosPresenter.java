@@ -12,13 +12,13 @@ import com.alura.sida.model.ProdutoObj;
 import java.util.List;
 
 public class ListaDeProdutosPresenter {
+
     public ListaDeProdutosPresenter(IlistaDeProdutosView view) {
         this._view = view;
     }
 
     private IlistaDeProdutosView _view;
     private ProdutoRoomDao _produtoDao;
-    private List<ProdutoObj> _todosProdutos;
 
     public void onCreate(Context context)
     {
@@ -36,7 +36,7 @@ public class ListaDeProdutosPresenter {
         new InserirProdutoTask(_produtoDao,produtoRecebido).execute();
     }
 
-    public void alteraProduto(int posicao, ProdutoObj produto) {
+    public void alteraProduto( ProdutoObj produto) {
         new AlterarProdutoTask(_produtoDao,produto).execute();
     }
 

@@ -1,5 +1,10 @@
 package com.alura.sida.ui.listaDeProdutos;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -7,24 +12,18 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-
 import com.alura.sida.R;
 import com.alura.sida.asyncTask.BuscarTodosProdutosTask;
-import com.alura.sida.asyncTask.listeners.BuscarTodosProdutosListener;
-import com.alura.sida.dao.ProdutoDao;
 import com.alura.sida.dao.ProdutoDataBase;
 import com.alura.sida.dao.ProdutoRoomDao;
 import com.alura.sida.databinding.ListaDeProdutosActivityBinding;
 import com.alura.sida.model.ProdutoObj;
 import com.alura.sida.ui.formulario.FormularioProdutosActivity;
+import com.alura.sida.utils.NumberUtils;
 import com.alura.sida.widget.SimpleDividerItemDecoration;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.alura.sida.ui.Const.CHAVE_POSICAO;
 import static com.alura.sida.ui.Const.CHAVE_PRODUTO;
@@ -47,8 +46,8 @@ public class ListaDeProdutosActivity extends AppCompatActivity implements Ilista
                 R.layout.lista_de_produtos_activity);
         _presenter = new ListaDeProdutosPresenter(this);
         _presenter.onCreate(this);
-         _produtoDao = ProdutoDataBase.getInstance(this).getProdutoDao();
-        getSupportActionBar().hide();
+        _produtoDao = ProdutoDataBase.getInstance(this).getProdutoDao();
+        Objects.requireNonNull(getSupportActionBar()).hide();
     }
 
 
@@ -56,8 +55,9 @@ public class ListaDeProdutosActivity extends AppCompatActivity implements Ilista
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         configuracaoPadraoDaLista(linearLayoutManager);
         popularListaProdutos(todosProdutos);
-
     }
+
+
 
     public void configuraItemTouchHelper(RecyclerView listaProduto) {
         ItemTouchHelper touchHelper = new ItemTouchHelper
@@ -76,8 +76,14 @@ public class ListaDeProdutosActivity extends AppCompatActivity implements Ilista
     public void popularListaProdutos(List<ProdutoObj> todosProdutos) {
         _adapter = new ProdutosAdapter(todosProdutos, this);
         _binding.rvListaProduto.setAdapter(_adapter);
+        atualizarQuantidadeESoma();
         configuraItemTouchHelper(_binding.rvListaProduto);
         controleVisaoLista(todosProdutos);
+    }
+
+    private void atualizarQuantidadeESoma() {
+        _binding.valorTotal.setText(NumberUtils.formatarDecimal(_adapter.getTotal()));
+        _binding.quantidade.setText(String.valueOf(_adapter.getItemCount()));
     }
 
     public void controleVisaoLista(List<ProdutoObj> todosProdutos) {
@@ -88,6 +94,7 @@ public class ListaDeProdutosActivity extends AppCompatActivity implements Ilista
             _binding.mensagemListaVazia.setVisibility(View.VISIBLE);
             _binding.imagemSeta.setVisibility(View.VISIBLE);
         }
+        atualizarQuantidadeESoma();
     }
 
     public void irParaFormulario(View v) {
@@ -99,18 +106,28 @@ public class ListaDeProdutosActivity extends AppCompatActivity implements Ilista
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (ehResultadoNovoProduto(requestCode, resultCode, data)) {
-            ProdutoObj produtoRecebido = (ProdutoObj) data.getSerializableExtra(CHAVE_PRODUTO);
+            ProdutoObj produtoRecebido = null;
+            if (data != null) {
+                produtoRecebido = (ProdutoObj) data.getSerializableExtra(CHAVE_PRODUTO);
+            }
             adicionaProduto(produtoRecebido);
         } else if (ehResultadoDeAlteracao(requestCode, resultCode, data)) {
-            ProdutoObj produtoRecebido = (ProdutoObj) data.getSerializableExtra(CHAVE_PRODUTO);
-            int posicaoRecebida = data.getIntExtra(CHAVE_POSICAO, POSICAO_INVALIDA);
+            ProdutoObj produtoRecebido = null;
+            if (data != null) {
+                produtoRecebido = (ProdutoObj) data.getSerializableExtra(CHAVE_PRODUTO);
+            }
+
+            int posicaoRecebida = Objects.requireNonNull(data).
+                    getIntExtra(CHAVE_POSICAO, POSICAO_INVALIDA);
+
             alteraProduto(produtoRecebido, posicaoRecebida);
         }
     }
 
     private void alteraProduto(ProdutoObj produto, int posicao) {
-        _presenter.alteraProduto(posicao, produto);
+        _presenter.alteraProduto(produto);
         _adapter.altera(posicao, produto);
+        atualizarQuantidadeESoma();
     }
 
     private boolean ehResultadoDeAlteracao(int requestCode, int resultCode, Intent data) {
@@ -118,13 +135,12 @@ public class ListaDeProdutosActivity extends AppCompatActivity implements Ilista
                 && resultCode == Activity.RESULT_OK
                 && data != null
                 && data.hasExtra(CHAVE_PRODUTO);
-
     }
 
     private void adicionaProduto(ProdutoObj produtoRecebido) {
         _presenter.insereProduto(produtoRecebido);
         _adapter.adicionaProduto(produtoRecebido);
-
+        atualizarQuantidadeESoma();
     }
 
     private boolean ehResultadoNovoProduto(int requestCode, int resultCode, Intent data) {
@@ -137,7 +153,6 @@ public class ListaDeProdutosActivity extends AppCompatActivity implements Ilista
     @Override
     protected void onResume() {
         super.onResume();
-        new BuscarTodosProdutosTask(_produtoDao, produtos ->
-                controleVisaoLista(produtos)).execute();
+        new BuscarTodosProdutosTask(_produtoDao, this::controleVisaoLista).execute();
     }
 }

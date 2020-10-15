@@ -3,11 +3,26 @@ package com.alura.sida.ui.formulario;
 public class ValidadorFormulário {
 
     private final String produtoNome;
-    private final String produtoPreco;
-    private final String produtoMarca;
-    private final String produtoPeso;
+    private String produtoPreco;
+    private String produtoMarca;
+    private String produtoPeso;
 
-    public ValidadorFormulário(String produtoNome,
+    public ValidadorFormulário(String produtoNome) {
+        this.produtoNome = produtoNome;
+    }
+
+    public String validarNome() {
+        String mensagem = "";
+
+        if (produtoNome.isEmpty())
+        {
+            mensagem = "Preencha o nome do produto";
+        }
+
+        return mensagem;
+    }
+
+    /*public ValidadorFormulário(String produtoNome,
                                String produtoPreco,
                                String produtoMarca,
                                String produtoPeso) {
@@ -33,5 +48,5 @@ public class ValidadorFormulário {
             mensagem = "Preencha o preço do produto";
         }
         return mensagem;
-    }
+    }*/
 }

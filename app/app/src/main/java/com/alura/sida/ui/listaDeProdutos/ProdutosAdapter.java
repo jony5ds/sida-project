@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alura.sida.R;
 import com.alura.sida.databinding.ItemListaProdutosActivityBinding;
 import com.alura.sida.model.ProdutoObj;
+import com.alura.sida.ui.calculoTotal.CalculoTotalDeProdutos;
 import com.alura.sida.ui.formulario.FormularioProdutosActivity;
 
 import java.util.List;
@@ -70,16 +71,31 @@ public class ProdutosAdapter extends  RecyclerView.Adapter<ProdutosViewHolder> {
     public void remove(int produtoPosicao) {
             _listaDeProdutos.remove(produtoPosicao);
             notifyItemRemoved(produtoPosicao);
+           // calcularSoma();
     }
 
     public void adicionaProduto(ProdutoObj produto) {
         _listaDeProdutos.add(produto);
         notifyDataSetChanged();
+        //calcularSoma();
+
 
     }
 
     public void altera(int posicao, ProdutoObj produto) {
         _listaDeProdutos.set(posicao,produto);
         notifyDataSetChanged();
+       // calcularSoma();
     }
+
+  /*  public void calcularSoma()
+    {
+        CalculoTotalDeProdutos.somar(_listaDeProdutos);
+    }*/
+
+    public float getTotal()
+    {
+        return CalculoTotalDeProdutos.somar(_listaDeProdutos);
+    }
+
 }

@@ -17,7 +17,7 @@
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="26dp"
+                android:layout_marginStart="26dp"
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/dancingscript_bold"
                 android:text="@string/sida"
@@ -35,19 +35,6 @@
             android:orientation="vertical"
             android:padding="8dp">
 
-            <TextView
-                android:id="@+id/mensagem_lista_vazia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="48dp"
-                android:layout_marginRight="8dp"
-                android:fontFamily="@font/shadowsintolight_regular"
-                android:text="@string/mensagem_lista_vazia"
-                android:textSize="22sp"
-                android:visibility="gone"/>
-
-
             <ImageView
                 android:id="@+id/imagem_seta"
                 android:layout_width="150dp"
@@ -57,13 +44,73 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="80dp"
                 android:src="@drawable/seta_azul"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                android:contentDescription="TODO" />
+
+            <LinearLayout
+                android:id="@+id/topo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="32dp"
+                android:layout_marginStart="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Produtos"
+                    android:textSize="24sp"
+                    android:fontFamily="@font/dancingscript_bold"/>
+
+                <TextView
+                    android:id="@+id/quantidade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:layout_marginLeft="8dp"
+                    android:fontFamily="@font/dancingscript_bold"
+                    android:textSize="18sp"
+                    android:gravity="right"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="64dp"
+                    android:text="Total"
+                    android:textSize="24sp"
+                    android:fontFamily="@font/dancingscript_bold" />
+
+                <TextView
+                    android:id="@+id/valorTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/dancingscript_bold"
+                    android:textSize="18sp" />
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/mensagem_lista_vazia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_below="@id/topo"
+                android:layout_marginTop="64dp"
+                android:layout_marginRight="8dp"
+                android:fontFamily="@font/shadowsintolight_regular"
+                android:text="@string/mensagem_lista_vazia"
+                android:textSize="22sp"
+                android:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_lista_produto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:layout_below="@id/topo"
                 tools:listitem="@layout/item_lista_produtos_activity" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton

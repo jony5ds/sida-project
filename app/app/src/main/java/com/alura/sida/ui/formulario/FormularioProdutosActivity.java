@@ -31,9 +31,8 @@ public class FormularioProdutosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        _binding = DataBindingUtil.setContentView(this,
-                R.layout.activity_formulario_produtos);
-        getSupportActionBar().hide();
+
+        montarLayout();
 
         mascaraMonetaria();
 
@@ -41,6 +40,12 @@ public class FormularioProdutosActivity extends AppCompatActivity {
 
         veficaEdicao(dadosRecebidos);
 
+    }
+
+    private void montarLayout() {
+        _binding = DataBindingUtil.setContentView(this,
+                R.layout.activity_formulario_produtos);
+        getSupportActionBar().hide();
     }
 
     private void veficaEdicao(Intent dadosRecebidos) {
@@ -94,12 +99,9 @@ public class FormularioProdutosActivity extends AppCompatActivity {
 
     public boolean temCampoInvalido() {
         ValidadorFormulário validarFormulario =
-                new ValidadorFormulário(_binding.formNome.getText().toString(),
-                        _binding.formPreco.getText().toString(),
-                        _binding.formMarca.getText().toString(),
-                        _binding.formPeso.getText().toString());
+                new ValidadorFormulário(_binding.formNome.getText().toString());
 
-        String mensagem = validarFormulario.validar();
+        String mensagem = validarFormulario.validarNome();
         if (!mensagem.isEmpty()) {
             Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
             return true;
