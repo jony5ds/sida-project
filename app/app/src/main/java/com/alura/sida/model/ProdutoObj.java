@@ -14,15 +14,17 @@ public class ProdutoObj implements Serializable {
     private String marca;
     private float preco;
     private String kg;
+    private int quantidade;
 
     public ProdutoObj() {
     }
 
-    public ProdutoObj(String nome, String marca, float preco,String kg) {
-        this.nome   = nome;
-        this.marca  = marca;
-        this.preco  = preco;
-        this.kg     = kg;
+    public ProdutoObj(String nome, String marca, float preco,String kg, int quantidade) {
+        this.nome        = nome;
+        this.marca       = marca;
+        this.preco       = preco;
+        this.kg          = kg;
+        this.quantidade = quantidade;
     }
 
     public long getProdutoId() {
@@ -81,4 +83,16 @@ public class ProdutoObj implements Serializable {
     }
 
 
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public String getQuantidadeFormatado ()
+    {
+        return String.valueOf(quantidade);
+    }
+
+    public void setQuantidade(int quantidadde) {
+        this.quantidade = quantidadde;
+    }
 }

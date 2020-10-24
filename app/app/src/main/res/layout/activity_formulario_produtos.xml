@@ -66,6 +66,17 @@
             android:importantForAutofill="no" />
 
         <EditText
+            android:id="@+id/form_quantidade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:fontFamily="@font/dancingscript_regular"
+            android:textSize="24sp"
+            android:hint="@string/quantidade"
+            android:inputType="number"
+            android:importantForAutofill="no" />
+
+        <EditText
             android:id="@+id/form_peso"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -76,7 +87,6 @@
             android:hint="@string/kg"
             android:inputType="numberDecimal"
             android:autofillHints="no" />
-
 
     </LinearLayout>
 

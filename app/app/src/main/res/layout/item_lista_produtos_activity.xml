@@ -26,8 +26,8 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="2dp"
             android:layout_toRightOf="@id/produto_titulo"
-            android:text="@{produto.nome}"
             android:fontFamily="@font/dancingscript_bold"
+            android:text="@{produto.nome}"
             android:textSize="24sp"
             tools:text="Feijão" />
 
@@ -55,6 +55,29 @@
             tools:text="Caioca" />
 
         <TextView
+            android:id="@+id/quantidade_titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/marca_titulo"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/dancingscript_regular"
+            android:text="Quantidade:"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/quantidade_texto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/marca_titulo"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@id/quantidade_titulo"
+            android:fontFamily="@font/dancingscript_regular"
+            android:text="@{produto.quantidadeFormatado}"
+            android:textSize="20sp"
+            tools:text="2" />
+
+        <TextView
             android:id="@+id/produto_preco"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,11 +94,11 @@
             android:layout_below="@id/produto_preco"
             android:layout_alignParentRight="true"
             android:layout_marginTop="8dp"
-
             android:fontFamily="@font/dancingscript_regular"
             android:text="@{produto.pesoFormatado}"
             android:textSize="20sp"
             tools:text="KG: 5.00" />
+
 
     </RelativeLayout>
 

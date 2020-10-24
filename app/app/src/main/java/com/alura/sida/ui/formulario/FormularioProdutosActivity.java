@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.alura.sida.R;
-import com.alura.sida.dao.ProdutoDao;
 import com.alura.sida.databinding.ActivityFormularioProdutosBinding;
 import com.alura.sida.model.ProdutoObj;
 import com.alura.sida.utils.NumberUtils;
@@ -66,6 +65,7 @@ public class FormularioProdutosActivity extends AppCompatActivity {
         _binding.formMarca.setText(produtoRecebido.getMarca());
         _binding.formPreco.setText(produtoRecebido.getPrecoString());
         _binding.formPeso.setText(produtoRecebido.getKg());
+        _binding.formQuantidade.setText(String.valueOf(produtoRecebido.getQuantidade()));
     }
 
     private void mascaraMonetaria() {
@@ -93,15 +93,17 @@ public class FormularioProdutosActivity extends AppCompatActivity {
         return _produto = new ProdutoObj(_binding.formNome.getText().toString(),
                 _binding.formMarca.getText().toString(),
                 NumberUtils.dinheiroParaFloat(_binding.formPreco.getText().toString()),
-                _binding.formPeso.getText().toString());
+                _binding.formPeso.getText().toString(),
+                Integer.parseInt( _binding.formQuantidade.getText().toString()));
     }
 
 
     public boolean temCampoInvalido() {
         ValidadorFormulário validarFormulario =
-                new ValidadorFormulário(_binding.formNome.getText().toString());
+                new ValidadorFormulário(_binding.formNome.getText().toString(),
+                        _binding.formQuantidade.getText().toString());
 
-        String mensagem = validarFormulario.validarNome();
+        String mensagem = validarFormulario.validar();
         if (!mensagem.isEmpty()) {
             Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
             return true;

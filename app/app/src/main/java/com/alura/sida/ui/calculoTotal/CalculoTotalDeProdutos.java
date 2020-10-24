@@ -12,8 +12,21 @@ public class CalculoTotalDeProdutos {
 
         for(ProdutoObj novoProduto : listaDeProdutos )
         {
-            total += novoProduto.getPreco();
+            total += novoProduto.getPreco() * novoProduto.getQuantidade();
         }
         return total;
+    }
+
+    public static int totalQuantidade(List<ProdutoObj> listaDeProdutos)
+    {
+        int total = 0;
+
+        for(ProdutoObj novoProduto : listaDeProdutos )
+        {
+            total += novoProduto.getQuantidade();
+        }
+
+        return total;
+
     }
 }

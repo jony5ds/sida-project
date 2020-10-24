@@ -83,7 +83,7 @@ public class ListaDeProdutosActivity extends AppCompatActivity implements Ilista
 
     private void atualizarQuantidadeESoma() {
         _binding.valorTotal.setText(NumberUtils.formatarDecimal(_adapter.getTotal()));
-        _binding.quantidade.setText(String.valueOf(_adapter.getItemCount()));
+        _binding.quantidade.setText(String.valueOf(_adapter.getQuantidade()));
     }
 
     public void controleVisaoLista(List<ProdutoObj> todosProdutos) {

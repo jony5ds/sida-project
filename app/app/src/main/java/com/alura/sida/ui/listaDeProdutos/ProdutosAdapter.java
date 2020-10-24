@@ -98,4 +98,9 @@ public class ProdutosAdapter extends  RecyclerView.Adapter<ProdutosViewHolder> {
         return CalculoTotalDeProdutos.somar(_listaDeProdutos);
     }
 
+    public int getQuantidade()
+    {
+        return CalculoTotalDeProdutos.totalQuantidade(_listaDeProdutos);
+    }
+
 }
