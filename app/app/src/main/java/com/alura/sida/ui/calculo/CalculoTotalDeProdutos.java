@@ -1,4 +1,4 @@
-package com.alura.sida.ui.calculoTotal;
+package com.alura.sida.ui.calculo;
 
 import com.alura.sida.model.ProdutoObj;
 
@@ -14,6 +14,12 @@ public class CalculoTotalDeProdutos {
         {
             total += novoProduto.getPreco() * novoProduto.getQuantidade();
         }
+
+        if (total < 0)
+        {
+            return 0;
+        }
+
         return total;
     }
 
@@ -24,6 +30,11 @@ public class CalculoTotalDeProdutos {
         for(ProdutoObj novoProduto : listaDeProdutos )
         {
             total += novoProduto.getQuantidade();
+        }
+
+        if (total < 0)
+        {
+            return 0;
         }
 
         return total;

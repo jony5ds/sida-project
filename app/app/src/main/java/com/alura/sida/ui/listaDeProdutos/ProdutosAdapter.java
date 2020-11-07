@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alura.sida.R;
 import com.alura.sida.databinding.ItemListaProdutosActivityBinding;
 import com.alura.sida.model.ProdutoObj;
-import com.alura.sida.ui.calculoTotal.CalculoTotalDeProdutos;
+import com.alura.sida.ui.calculo.CalculoTotalDeProdutos;
 import com.alura.sida.ui.formulario.FormularioProdutosActivity;
 
 import java.util.List;
